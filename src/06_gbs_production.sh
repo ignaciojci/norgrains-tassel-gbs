@@ -9,9 +9,6 @@
 
 set -u -e -o pipefail -x
 
-module load bcftools
-module load vcftools
-
 # Default values
 enzyme="PstI-MspI"
 tag_length=75

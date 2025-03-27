@@ -6,7 +6,7 @@ RD=/fs/ess/PAS2444/norgrains-tassel-gbs
 WD=/fs/ess/PAS2444/25NORGRAINS/production
 FASTQ=/fs/ess/PAS2444/24_HistoricalBig6/FastQs
 KF=/fs/ess/PAS2444/25NORGRAINS/25NOR01-09_LIBPREPID_03-26-2025.txt
-STUDY=25_norgrains_test
+STUDY=25_norgrains
 
 #### Advanced configuration (don't usually need to change)
 DB=/fs/ess/PAS2444/24_HistoricalBig6/WD/database/HistoricalBig6_032824.db
@@ -16,5 +16,8 @@ E=PstI-MspI
 TAG_LENGTH=75
 MIN_Q=0
 ext="vcf"
-MIN_MEM=100g
+MIN_MEM=2g
 MAX_MEM=363g
+
+#### Scripts
+filt_src="$RD/src/filter_markers.sh"

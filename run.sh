@@ -9,6 +9,9 @@
 
 set -u -e -o pipefail -x
 
+module load bcftools/1.16
+module load vcftools
+
 # Run with
 # sbatch /fs/ess/PAS2444/norgrains-tassel-gbs/run.sh
 
@@ -44,3 +47,9 @@ fi
 	-o "$ext" \
 	-n $MIN_MEM \
 	-x $MAX_MEM
+
+# todo: setup dependencies after each step
+### JOBID1=$(sbatch --parsable <other_options> <submission_script>)
+### sbatch --dependency=afterok:$JOBID1
+# todo: call in pipeline, specifying which step to start
+
