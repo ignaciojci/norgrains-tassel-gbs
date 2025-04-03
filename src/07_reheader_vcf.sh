@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --time=1-00:00:00
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=4
 #SBATCH --job-name=25NORGRAINS_Step7
 #SBATCH --account=PAS2444
 #SBATCH --output=logs/%x-%A_%a.out
@@ -22,6 +22,10 @@ STUDY=25_norgrains                                            ##!!!
 TASSEL_PL=/fs/ess/PAS2444/TASSEL5/tassel-5-standalone/run_pipeline.pl
 
 source /fs/ess/PAS2444/norgrains-tassel-gbs/config.sh
+
+if [[ -z "${nthreads+x}" ]]; then  # Checks if nthreads is unset
+    nthreads="${SLURM_CPUS_PER_TASK:-1}"
+fi
 
 # Detect memory
 if [ -z ${SLURM_MEM_PER_CPU+0} ]; then
@@ -88,7 +92,7 @@ mv raw_VCF/header.vcf $OUTFILE
 #### Compress/Index VCF #######################################################
 ## Compress VCF file to either .vcf.gz or .bcf file
 #bcftools view "$OUTFILE" -Oz -o "$FINAL_FILE"
-bgzip "$OUTFILE" > "$FINAL_FILE"
+bgzip -c --threads $nthreads "$OUTFILE" > "$FINAL_FILE"
 bcftools index -f "$FINAL_FILE"
 
 #### Calculate summary stats ##################################################
