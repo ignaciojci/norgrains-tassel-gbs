@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --job-name=25NORGRAINS_Step9
 #SBATCH --account=PAS2444
-#SBATCH --output=logs/%x-%A_%a.out
-#SBATCH --error=logs/%x-%A_%a.err 
+#SBATCH --output=logs/%x-%A.out
+#SBATCH --error=logs/%x-%A.err 
 
 # Run with
 # sbatch /fs/ess/PAS2444/norgrains-tassel-gbs/src/09_split_vcf_by_groups.sh \

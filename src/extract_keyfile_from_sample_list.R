@@ -155,10 +155,18 @@ sum(table(unlist(lapply(matches, length))))
 # 
 # vector2 <- kf_list[[3]]
 # vector1 <- c("SY 100")
+unlisted_matches <- unlist(matches)
 
-new_kf <- all_kf[unlist(matches),]
+new_df <- data.frame(
+  QueryName = rep(names(matches), lengths(matches)),
+  UniqueQueryName = names(unlisted_matches),
+  KeyfileIndex = unlist(matches, use.names = FALSE)
+)
+
+new_kf <- all_kf[new_df$KeyfileIndex,]
 new_kf$OldFullSampleName <- new_kf$FullSampleName
-new_kf$FullSampleName <- new_kf$query_names <- names(unlist(matches))
+new_kf$query_name <- new_df$QueryName
+new_kf$FullSampleName <-new_df$UniqueQueryName
 
 write_delim(new_kf, out_keyfile, "\t")
 # match_names <- function(vector2, vector1) {

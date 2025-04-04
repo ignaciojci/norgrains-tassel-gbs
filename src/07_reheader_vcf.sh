@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --job-name=25NORGRAINS_Step7
 #SBATCH --account=PAS2444
-#SBATCH --output=logs/%x-%A_%a.out
-#SBATCH --error=logs/%x-%A_%a.err
+#SBATCH --output=logs/%x-%A.out
+#SBATCH --error=logs/%x-%A.err
 
 # Run with
 # sbatch /fs/ess/PAS2444/norgrains-tassel-gbs/src/07_reheader_vcf.sh

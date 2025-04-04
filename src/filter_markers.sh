@@ -123,6 +123,7 @@ date
 regions_bed=$3
 array_ind=$4
 nthreads=$5
+STUDY=$6
 
 ## Get first letter of true/false het2miss option and
 ## Set some constants depending on het2miss
@@ -165,7 +166,7 @@ fi
 ## If the supplied array_ind is 0, we copy full regions .bed file to temp dir.
 ## Otherwise extract single region from .bed file
 if [[ array_ind -eq 0 ]]; then
-    label="05_all_regions_filt"
+    label="$STUDY"
     cp "$regions_bed" "${out_dir}/temp_files/${label}.bed"
 else
     ## This ensures output VCFs will have names in order, to avoid needing to
@@ -238,7 +239,7 @@ if [[ $array_ind -eq 0 ]]; then
     bcftools stats "${out_dir}/${label}.vcf.gz" > "${out_dir}/stats.txt"
 
     ## Create plots from summary stats
-    mkdir "${out_dir}/plots"
+    mkdir -p "${out_dir}/plots"
     plot-vcfstats --prefix "${out_dir}/plots" --no-PDF "${out_dir}/stats.txt"
 fi
 
